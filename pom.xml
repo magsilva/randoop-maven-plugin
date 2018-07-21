@@ -14,7 +14,8 @@
 
     <properties>
         <!-- Put Randoop Version Here -->
-        <revision>3.1.5</revision>
+        <randoop.version>4.0.3</randoop.version>
+        <revision>${randoop.version}-kpi</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -22,18 +23,18 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.version>3.5.0</maven.version>
         <randoop-url>
-            https://github.com/randoop/randoop/releases/download/v${revision}/randoop-all-${revision}.jar
+            https://github.com/randoop/randoop/releases/download/v${randoop.version}/randoop-all-${randoop.version}.jar
         </randoop-url>
     </properties>
 
     <dependencies>
         <!-- only needed to make IDE happy -->
-        <dependency>
-            <groupId>randoop</groupId>
-            <artifactId>randoop-all</artifactId>
-            <version>${revision}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>randoop</groupId>-->
+            <!--<artifactId>randoop-all</artifactId>-->
+            <!--<version>${randoop.version}</version>-->
+            <!--&lt;!&ndash;<scope>provided</scope> &lt;!&ndash;change it&ndash;&gt;&ndash;&gt;-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
@@ -95,7 +96,7 @@
                             <packaging>jar</packaging>
                             <generatePom>true</generatePom>
                             <file>
-                                ${project.build.directory}/randoop-lib/randoop-all-${revision}.jar
+                                ${project.build.directory}/randoop-lib/randoop-all-${randoop.version}.jar
                             </file>
                         </configuration>
                     </execution>
