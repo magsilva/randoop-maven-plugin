@@ -71,10 +71,71 @@ public class RandoopMojo extends AbstractMojo {
     args.add(classPath);
     args.add("randoop.main.Main");
     args.add("gentests");
-    args.add("--timelimit=" + timeoutInSeconds);
-    args.add("--debug-checks=true");
+    
+    // Code under test
+    args.add("--only-test-public-members=false");
+    args.add("--flaky-test-behavior=OUTPUT");
+    args.add("--nondeterministic-methods-to-output=1000");
+
+    // Which tests to output:
+    args.add("--no-error-revealing-tests=false");
+    args.add("--no-regression-tests=false");
+    args.add("--no-regression-assertions=false");
+    args.add("--check-compilable=true");
+    args.add("--minimize-error-test=false");
+
+    // Test classification
+    args.add("--checked-exception=EXPECTED");
+    args.add("--unchecked-exception=EXPECTED");
+    args-add("--cm-exception=INVALID");
+    args.add("--ncdf-exception=INVALID");
+    args.add("--npe-on-null-input=EXPECTED");
+    args.add("--npe-on-non-null-input=ERROR");
+    args.add("--oom-exception=INVALID");
+    args.add("--sof-exception=INVALID");
+    args.add("--use-jdk-specifications=true");
+    args.add("--ignore-condition-compilation-error=false");
+    args.add("--ignore-condition-exception=false");
+
+    // Limiting test generation
+    args.add("--time-limit=" + timeoutInSeconds);
+    args.add("--attempted-limit=100000000");
+    args.add("--generated-limit=100000000");
+    args.add("--output-limit=100000000");
+    args.add("--maxsize=1000");
+    args.add("--stop-on-error-test=false");
+
+    // Values used in tests
+    args.add("--null-ratio=0.05");
+    args.add("--forbid-null=false");
+    args.add("--literals-level=CLASS");
+    args.add("--method-selection=UNIFORM");
+    args.add("--string-maxlen=1000");
+
+    // Varying the nature of generated tests:
+    args.add("--alias-ratio=0.0");
+    args.add("--input-selection=UNIFORM");
+    args.add("--clear=100000000");
+
+    // Outputting the JUnit tests:
     args.add("--junit-package-name=" + packageName);
     args.add("--junit-output-dir=" + targetDirectory);
+    args.add("--dont-output-tests=false");
+    args.add("--junit-reflection-allowed=true");
+
+    // Controlling randomness:
+    args.add("--randomseed=0");
+    args.add("--deterministic=false");
+
+    // Logging, notifications, and troubleshooting Randoop:
+    args.add("--progressdisplay=false");
+    args.add("--debug-checks=false");
+    // args.add("--log=<filename>");
+    // args.add("--operation-history-log=<filename>");
+
+    // Threading
+    args.add("--usethreads=false");
+    args.add("--call-timeout=5000");
 
     // Add project classes
     final URLClassLoader classLoader = new URLClassLoader(convert(urls));
