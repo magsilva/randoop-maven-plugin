@@ -15,6 +15,9 @@ public final class ClassFinder {
 
   private static final String BAD_PACKAGE_ERROR = "Unable to get resources from path '%s'. Are you sure the package '%s' exists?";
 
+  private ClassFinder() {
+  }
+
   public static List<Class<?>> find(final String scannedPackage, final ClassLoader classLoader) {
     String scannedPath = scannedPackage.replace(PKG_SEPARATOR, DIR_SEPARATOR);
     URL scannedUrl = classLoader.getResource(scannedPath);
@@ -22,7 +25,7 @@ public final class ClassFinder {
       throw new IllegalArgumentException(String.format(BAD_PACKAGE_ERROR, scannedPath, scannedPackage));
     }
     File scannedDir = new File(scannedUrl.getFile());
-    List<Class<?>> classes = new ArrayList<Class<?>>();
+    List<Class<?>> classes = new ArrayList<>();
     for (File file : scannedDir.listFiles()) {
       classes.addAll(find(file, scannedPackage, classLoader));
     }
@@ -30,7 +33,7 @@ public final class ClassFinder {
   }
 
   private static List<Class<?>> find(File file, String scannedPackage, ClassLoader classLoader) {
-    List<Class<?>> classes = new ArrayList<Class<?>>();
+    List<Class<?>> classes = new ArrayList<>();
     String resource = scannedPackage + PKG_SEPARATOR + file.getName();
     if (file.isDirectory()) {
       for (File child : file.listFiles()) {
