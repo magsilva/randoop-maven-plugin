@@ -3,7 +3,7 @@ A plugin for using Randoop in Maven. See https://randoop.github.io for more info
 
 ## Todo
 1. Use maven dependency for Randoop as soon as available
-1. Check if if need all or which configuration parameters from Randoop should be available via 
+1. Check if need all or which configuration parameters from Randoop should be available via
 Maven.
 1. Should the ErrorTest be excluded by default since it is red until code change?
 1. Fix redirect console from Randoop process into Maven for logging purposes
@@ -13,20 +13,22 @@ Maven.
 A brief description of needed steps.
 
 ### 1. Step
+Run maven initialize goal first, followed by following goals
+
 Install into local Maven repository:
 ```
 mvn clean install
 ```
-To override Randoop version 3.1.5 if needed run instead:
+To override Randoop version (if needed) run instead:
 ```
 mvn clean install -Drevision=new.version
 ```
 A new version of Randoop will be download from the GitHub releases.
 
 ### 2. Step
-Integrate into another (local) Maven project by adding to the plugins section the following 
+Integrate into another (local) Maven project by adding to the plugins section the following
 plugin:
- 
+
 ```xml
 <build>
     ...
@@ -35,7 +37,7 @@ plugin:
         <plugin>
             <groupId>randoop</groupId>
             <artifactId>randoop-maven-plugin</artifactId>
-            <version>3.1.5</version>
+            <version>4.2.3</version>
             <configuration>
                 <packageName>my.base.package</packageName>
             </configuration>
