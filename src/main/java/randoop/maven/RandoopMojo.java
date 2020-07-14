@@ -223,11 +223,7 @@ public class RandoopMojo extends AbstractMojo {
 
     private String generateClasspath(final List<URL> urls) {
         return urls.stream()
-                .map(u -> {
-                    final String firstIllegalCharacter = "/";
-                    String path = u.getPath();
-                    return path.startsWith(firstIllegalCharacter) ? path.replaceFirst(firstIllegalCharacter, "") : path;
-                })
+                .map(u -> u.toString())
                 .collect(Collectors.joining(File.pathSeparator));
     }
 
